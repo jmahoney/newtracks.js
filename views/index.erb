@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Newtracks.js</title>
+  </head>
+  <body>
+    <h1>Newtracks.js for <%= username %></h1>
+    
+    <div class="container" ng-app="ngLastfm">
+      <div ng-controller="RecentTracks">
+        <h2>Recent</h2>
+        
+        
+        <p ng-repeat="track in recentTracks">
+          {{track.artist['content']}} - {{track.name}}
+        </p>
+      </div>
+    </div>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular-resource.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="newtracks.js"></script>
+  </body>
+</html>
