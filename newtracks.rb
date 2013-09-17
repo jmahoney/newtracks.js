@@ -2,9 +2,13 @@ require 'sinatra'
 require 'lastfm'
 require 'json'
 
-enable :sessions
+if settings.environment == :development
+  require 'debugger'
+  require 'dotenv'
+  Dotenv.load   
+end
 
-LASTFM = Lastfm.new(ENV['LAST_API'], ENV['LAST_SECRET'])
+enable :sessions
 
 get '/' do  
   if session[:lastfm_session].nil?
@@ -15,21 +19,31 @@ get '/' do
 end
 
 # handle getting a token back from last.fm
-get '/callback' do
-  session[:lastfm_token] = params[:token]
-  session[:lastfm_session] = LASTFM.auth.get_session(params[:token])
+get '/callback' do  
+  session[:lastfm_session] = lastfm.auth.get_session(params[:token])
   redirect '/'
 end
 
 # get recent tracks for the logged in user
 get '/recent_tracks' do
   content_type :json  
-  tracks = LASTFM.user.get_recent_tracks(username)
+  tracks = lastfm.user.get_recent_tracks(username)
   tracks.to_json
 end
 
+get '/recommended_artists' do
+  content_type :json
+  api = lastfm
+  api.session = session[:lastfm_session]['key']
+  artists = api.user.get_recommended_artists
+  artists.to_json
+end
 
 helpers do
+  def lastfm
+    Lastfm.new(ENV['LAST_API'], ENV['LAST_SECRET'])
+  end
+  
   def username
     if session[:lastfm_session]
       session[:lastfm_session]['name']
