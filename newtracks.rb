@@ -39,6 +39,11 @@ get '/recommended_artists' do
   artists.to_json
 end
 
+get '/new_tracks' do
+  content_type :json
+  new_tracks.to_json
+end
+
 get '/reset' do
   session[:name] = nil
   session[:key] = nil
@@ -55,6 +60,22 @@ helpers do
     end
     lastfm
   end
+  
+  def new_tracks
+    lastfm = api(session[:key])
+    
+    artists = lastfm.user.get_recommended_artists
+    
+    tracks = []
+    
+    artists.each do |artist|
+      tracks << lastfm.artist.get_top_tracks(artist['name'])
+    end
+        
+    tracks
+  end
+  
+  
   
   def username
     session[:name].nil? ? 'UNKNOWN' : session[:name]
