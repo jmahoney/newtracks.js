@@ -8,13 +8,20 @@
     
     <div class="container" ng-app="ngLastfm">
       <div ng-controller="RecentTracks">
-        <h2>Recent</h2>
-        
-        
+        <h2>Recent Tracks</h2>
         <p ng-repeat="track in recentTracks">
           {{track.artist['content']}} - {{track.name}}
         </p>
       </div>
+      
+      <div ng-controller="RecommendedArtists">
+        <h2>Recommended Artists</h2>
+        <p ng-repeat="artist in recommendedArtists">
+          {{artist['name']}}
+        </p>
+      </div>
+      
+      
     </div>
     
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.js"></script>
