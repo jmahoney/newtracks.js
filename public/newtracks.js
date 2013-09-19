@@ -16,4 +16,10 @@ ngLastfm.controller("RecommendedArtists", function($scope, Lastfm) {
   $scope.recommendedArtists = Lastfm.recommendedArtists.query({}, isArray = true);
 });
 
-
+ngLastfm.controller("NewTracks", function($scope, Lastfm)) {
+   newTracks = Lastfm.newTracks.query({}, isArray = true).then(function(data){
+     
+   });
+  
+  
+}

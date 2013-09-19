@@ -64,14 +64,13 @@ helpers do
   def new_tracks
     lastfm = api(session[:key])
     
-    artists = lastfm.user.get_recommended_artists
-    
+    artists = lastfm.user.get_recommended_artists(limit: 10)    
+
     tracks = []
-    
+
     artists.each do |artist|
-      tracks << lastfm.artist.get_top_tracks(artist['name'])
+      tracks.concat(lastfm.artist.get_top_tracks(artist: artist['name'], limit: 2))
     end
-        
     tracks
   end
   
