@@ -6,26 +6,11 @@
   <body>
     <h1>Newtracks.js for <%= username %></h1>
     
-    <div class="container" ng-app="ngLastfm">
+    <div class="container" ng-app="ngNewTracks">
       <div ng-controller="NewTracks">
+        <iframe src="https://embed.spotify.com/?uri=spotify:trackset:NewTracks.js:{{spotifyTrackIds}}" frameborder="0" allowtransparency="true"></iframe>
         
       </div>
-      
-      
-      <div ng-controller="RecentTracks">
-        <h2>Recent Tracks</h2>
-        <p ng-repeat="track in recentTracks">
-          {{track.artist['content']}} - {{track.name}}
-        </p>
-      </div>
-      
-      <div ng-controller="RecommendedArtists">
-        <h2>Recommended Artists</h2>
-        <p ng-repeat="artist in recommendedArtists">
-          {{artist['name']}}
-        </p>
-      </div>
-      
       
     </div>
     
