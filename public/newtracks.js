@@ -20,9 +20,12 @@ ngNewTracks.controller("RecommendedArtists", function($scope, Lastfm) {
 
 ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {
   
+  // search for a track on spotify, passing in the artist name and track name
   searchSpotify = function(track) {
     console.log("looking up spotify for " + track['name'] + "by" + track['artist']['name']);    
-    var searchTerm = encodeURIComponent(track['artist']['name'] + " " + track['name']);    
+    var searchTerm = encodeURIComponent(track['artist']['name'] + " " + track['name']);
+    
+    // We're deferring the actual execution api call to the function that calls us        
     var d = $q.defer();
     var result = Lastfm.spotifyTrack.get({q: searchTerm}, function() {
       d.resolve(result);
@@ -30,6 +33,10 @@ ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {
     return d.promise;
   }
   
+  // the spotify player is an iframe that takes a string of ids
+  // as part of its url. this method massages the array
+  // of hrefs we got from the spotify api and turns them into 
+  // a comma delimited string the iframe player can use
   setupSpotifyPlayer = function(data) {
     console.log(data);
     data.forEach(function(obj, i) {
@@ -39,10 +46,13 @@ ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {
     console.log($scope.spotifyTrackIds);
   } 
   
+  // do spoitify searches with the data provied by lastfm
   getSpotifyTracks = function (trackData) {
     console.log("processing tracks");   
-    var promises = [];
     
+    // we wait till all our spotify calls are done before we do 
+    // anything with the data
+    var promises = [];    
     trackData.forEach(function(obj, i) {
       promises.push(searchSpotify(obj));      
     });
@@ -52,11 +62,10 @@ ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {
     $q.all(promises).then(function(value) {
       setupSpotifyPlayer(value)
     });
-    
   }
   
-  $scope.spotifyTracks = [];
   
+  $scope.spotifyTracks = [];
   Lastfm.newTracks.query({}, isArray = true).$then(function(value) {
     getSpotifyTracks(value.data);
   });
