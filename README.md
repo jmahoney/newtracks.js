@@ -10,8 +10,6 @@ We want to show a spotify player with tracks found via last.fm. In order to sati
 our "no server executable code" rule we'll have to use javascript to talk to
 spotify. In this case we're using angular.js.
 
-##### September 24, 2013
-
 At this point the basic functionality is working
 
 * there's an angular module with a set of resources for talking to the internal last.fm api and with spotify directly
