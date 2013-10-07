@@ -20,7 +20,7 @@ At this point the basic functionality is working
 
 On the todo list is:
 
-* create an angular directive for the player (i guess?)
+* only show the player once tracks are loaded
 * dive into angular routing and show different players based on different urls
 
 
