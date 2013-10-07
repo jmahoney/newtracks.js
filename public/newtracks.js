@@ -6,7 +6,6 @@ ngNewTracks.factory("Lastfm", function($resource){
     recommendedArtists  : $resource("/recommended_artists"),
     newTracks           : $resource("/new_tracks"),
     spotifyTrack        : $resource("http://ws.spotify.com/search/1/track.json")
-
   }
 });
 
@@ -18,8 +17,7 @@ ngNewTracks.controller("RecommendedArtists", function($scope, Lastfm) {
   $scope.recommendedArtists = Lastfm.recommendedArtists.query({}, isArray = true);
 });
 
-ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {
-  
+ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {  
   // search for a track on spotify, passing in the artist name and track name
   searchSpotify = function(track) {
     console.log("looking up spotify for " + track['name'] + "by" + track['artist']['name']);    
@@ -64,7 +62,6 @@ ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {
     });
   }
   
-  
   $scope.spotifyTracks = [];
   Lastfm.newTracks.query({}, isArray = true).$then(function(value) {
     getSpotifyTracks(value.data);
@@ -72,6 +69,16 @@ ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {
   
 });
 
-
+ngNewTracks.directive("spotifyPlayer", function(){
+  return {
+    restrict: "E",
+    transclude: true,
+    replace: true,
+    scope: {
+      tracks: "@"
+    },
+    template: "<iframe src='https://embed.spotify.com/?uri=spotify:trackset:NewTracks.js:{{tracks}}' frameborder='0' allowtransparency='true' width='300' height='800' ng-transclude></iframe>"        
+  }
+});
 
 
