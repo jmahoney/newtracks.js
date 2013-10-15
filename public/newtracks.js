@@ -18,6 +18,29 @@ ngNewTracks.controller("RecommendedArtists", function($scope, Lastfm) {
 });
 
 ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {  
+  $scope.spotifyTracks = [];
+  Lastfm.newTracks.query({}, isArray = true).$then(function(value) {
+    getSpotifyTracks(value.data);
+  });
+  
+  // do spoitify searches with the data provied by lastfm
+  getSpotifyTracks = function (trackData) {
+    console.log("processing tracks");   
+    
+    // we wait till all our spotify calls are done before we do 
+    // anything with the data
+    var promises = [];    
+    trackData.forEach(function(obj, i) {
+      promises.push(searchSpotify(obj));      
+    });
+    
+    console.log(promises);
+    
+    $q.all(promises).then(function(value) {
+      setupSpotifyPlayer(value)
+    });
+  }
+  
   // search for a track on spotify, passing in the artist name and track name
   searchSpotify = function(track) {
     console.log("looking up spotify for " + track['name'] + "by" + track['artist']['name']);    
@@ -43,29 +66,6 @@ ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {
     $scope.spotifyTrackIds = $scope.spotifyTracks.join(',');
     console.log($scope.spotifyTrackIds);
   } 
-  
-  // do spoitify searches with the data provied by lastfm
-  getSpotifyTracks = function (trackData) {
-    console.log("processing tracks");   
-    
-    // we wait till all our spotify calls are done before we do 
-    // anything with the data
-    var promises = [];    
-    trackData.forEach(function(obj, i) {
-      promises.push(searchSpotify(obj));      
-    });
-    
-    console.log(promises);
-    
-    $q.all(promises).then(function(value) {
-      setupSpotifyPlayer(value)
-    });
-  }
-  
-  $scope.spotifyTracks = [];
-  Lastfm.newTracks.query({}, isArray = true).$then(function(value) {
-    getSpotifyTracks(value.data);
-  });
   
 });
 
