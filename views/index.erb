@@ -9,11 +9,21 @@
   <body>
     <div class="container" ng-app="ngNewTracks">
       <h1>Newtracks.js for <%= username %></h1>
+      
       <div ng-controller="NewTracks">
-        <div ng-show="showplayer">
-        <spotify-player tracks="{{spotifyTrackIds}}"></spotify-player>
+        
+        <div class="row" ng-show="showplayer">
+          <div class="col-md-4">
+            <spotify-player tracks="{{spotifyTrackIds}}"></spotify-player>            
+          </div>
+          
+          <div class="col-md-8">
+            artist stuff here
+          </div>          
         </div>
+        
       </div>
+      
     </div>
     
     <script src="//code.jquery.com/jquery.js"></script>
