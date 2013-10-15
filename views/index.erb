@@ -8,7 +8,9 @@
     
     <div class="container" ng-app="ngNewTracks">
       <div ng-controller="NewTracks">
+        <div ng-show="showplayer">
         <spotify-player tracks="{{spotifyTrackIds}}"></spotify-player>
+        </div>
       </div>
     </div>
     

@@ -19,6 +19,7 @@ ngNewTracks.controller("RecommendedArtists", function($scope, Lastfm) {
 
 ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {  
   $scope.spotifyTracks = [];
+  $scope.showplayer = false;
   Lastfm.newTracks.query({}, isArray = true).$then(function(value) {
     getSpotifyTracks(value.data);
   });
@@ -34,10 +35,12 @@ ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {
       promises.push(searchSpotify(obj));      
     });
     
-    console.log(promises);
+    //console.log(promises);
     
     $q.all(promises).then(function(value) {
-      setupSpotifyPlayer(value)
+      console.log("fooooo");
+      populatePlaylist(value);
+      showSpotifyPlayer();
     });
   }
   
@@ -58,7 +61,7 @@ ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {
   // as part of its url. this method massages the array
   // of hrefs we got from the spotify api and turns them into 
   // a comma delimited string the iframe player can use
-  setupSpotifyPlayer = function(data) {
+  populatePlaylist = function(data) {
     console.log(data);
     data.forEach(function(obj, i) {
       $scope.spotifyTracks.push(obj['tracks'][0]['href'].substring(14));
@@ -66,6 +69,11 @@ ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {
     $scope.spotifyTrackIds = $scope.spotifyTracks.join(',');
     console.log($scope.spotifyTrackIds);
   } 
+  
+  showSpotifyPlayer = function() {
+    $scope.showplayer = true;
+    console.log("show the player");
+  }
   
 });
 
