@@ -19,6 +19,7 @@ At this point the basic functionality is working
 On the todo list is:
 
 * only show the player once tracks are loaded
+* show a bunch of artist/album images next to the player
 * dive into angular routing and show different players based on different urls
 
 
