@@ -2,11 +2,13 @@
 <html>
   <head>
     <title>Newtracks.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
   </head>
   <body>
-    <h1>Newtracks.js for <%= username %></h1>
-    
     <div class="container" ng-app="ngNewTracks">
+      <h1>Newtracks.js for <%= username %></h1>
       <div ng-controller="NewTracks">
         <div ng-show="showplayer">
         <spotify-player tracks="{{spotifyTrackIds}}"></spotify-player>
@@ -14,6 +16,8 @@
       </div>
     </div>
     
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-resource.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
