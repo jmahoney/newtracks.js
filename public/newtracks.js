@@ -1,3 +1,12 @@
+//MASONRY
+// var container = document.querySelector('#artistGrid');
+// var msnry = new Masonry( container, {
+//   // options
+//   columnWidth: 252,
+//   itemSelector: '.artist'
+// });
+
+// ANGULAR 
 var ngNewTracks = angular.module("ngNewTracks", ['ngResource']);
 
 ngNewTracks.factory("Lastfm", function($resource){
@@ -45,6 +54,7 @@ ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {
     $q.all(promises).then(function(value) {
       populatePlaylist(value);
       showSpotifyPlayer();
+      showArtistTiles();
     });
   }
   
@@ -75,6 +85,19 @@ ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {
     $scope.showplayer = true;
   }
   
+  showArtistTiles = function() {
+    var $container = $('#artistGrid');
+    // initialize
+    $container.masonry({
+      columnWidth: 252,
+      itemSelector: '.artist'
+    });    
+    setTimeout(function(){
+      console.log("calling layout?");
+      $container.masonry();
+    }, 1000);
+  }
+  
 });
 
 ngNewTracks.directive("spotifyPlayer", function(){
@@ -95,11 +118,11 @@ ngNewTracks.directive("artistTile", function(){
     transclue: true,
     replace: true,
     scope: {
-      src: "@",
-      name: "@",
-      link: "@"
+      url: "@",
+      img: "@",
+      name: "@"
     },
-    template: "<div class='artist'><a href='{{link}}'><img src='{{src}}' width='252' alt='{{name}}' border='0'></a><a href='{{link}}'>{{name}}</a>"    
+    template: "<div class='artist'><a href='{{url}}' title='{{name}}'><img src='{{img}}' width='252' alt='{{name}}' border='0'></a></div>"    
   }
 });
 
