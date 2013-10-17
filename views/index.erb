@@ -3,7 +3,7 @@
   <head>
     <title>Newtracks.js</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel="stylesheet" href="newtracks.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
   </head>
   <body>
@@ -18,7 +18,9 @@
           </div>
           
           <div class="col-md-8">
-            artist stuff here
+            <div class="artist" ng-repeat="artist in artists">
+              <artist-tile name="{{artist.name}}" link="{{artist.url}}" src="{{artist.image[3].content}}">
+            </div>
           </div>          
         </div>
         
