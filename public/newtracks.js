@@ -76,7 +76,12 @@ ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {
   // a comma delimited string the iframe player can use
   populatePlaylist = function(data) {
     data.forEach(function(obj, i) {
-      $scope.spotifyTracks.push(obj['tracks'][0]['href'].substring(14));
+      try {
+        console.log(i + ": " + obj['tracks'][0]['href']);
+        $scope.spotifyTracks.push(obj['tracks'][0]['href'].substring(14));        
+      } catch(e) {
+        console.log('error adding track');
+      }
     })
     $scope.spotifyTrackIds = $scope.spotifyTracks.join(',');
   } 
