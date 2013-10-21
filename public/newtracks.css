@@ -4,3 +4,12 @@ h1 {
   padding: 10px 10px 10px 20px;
   text-transform: uppercase;
 }
+
+p, a, a:visited, a:hover {
+  color: #EEE;
+  margin-top: 12px;
+}
+
+a {
+  text-decoration: underline;
+}

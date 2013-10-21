@@ -27,10 +27,9 @@ ngNewTracks.controller("RecommendedArtists", function($scope, Lastfm) {
 });
 
 ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {  
+  $scope.statusMessage = "Getting new tracks from last.fm...";
   $scope.spotifyTracks = [];
   $scope.showplayer = false;  
-
-  $scope.statusMessage = "Getting new tracks from last.fm...";
 
   Lastfm.newTracks.query({}, isArray = true).$then(function(value) {
     getSpotifyTracks(value.data);
