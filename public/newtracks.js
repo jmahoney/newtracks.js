@@ -29,7 +29,9 @@ ngNewTracks.controller("RecommendedArtists", function($scope, Lastfm) {
 ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {  
   $scope.spotifyTracks = [];
   $scope.showplayer = false;  
-  
+
+  $scope.statusMessage = "Getting new tracks from last.fm...";
+
   Lastfm.newTracks.query({}, isArray = true).$then(function(value) {
     getSpotifyTracks(value.data);
   });
@@ -44,10 +46,13 @@ ngNewTracks.controller("NewTracks", function($scope, $q, Lastfm) {
   
   // do spoitify searches with the data provied by lastfm
   getSpotifyTracks = function(trackData) {
+    $scope.statusMessage = "Looking up tracks on Spotify...";
+    
     // we wait till all our spotify calls are done before we do 
     // anything with the data
     var promises = [];    
     trackData.forEach(function(obj, i) {
+      $scope.statusMessage = $scope.statusMessage + ".";
       promises.push(searchSpotify(obj));      
     });
         

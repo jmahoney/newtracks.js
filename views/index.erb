@@ -7,9 +7,15 @@
     <link rel="stylesheet" href="newtracks.css">
   </head>
   <body>
-    <h1>Newtracks.js for <%= username %></h1>
+    <h1>Newtracks for <%= username %></h1>
     <div class="container" ng-app="ngNewTracks">
       <div ng-controller="NewTracks">
+        <div class="row" ng-hide="showplayer">
+          <div class="col-md-12">
+            <img src="waiting.gif" alt="Please wait...">
+            <p ng-show="statusMessage">{{statusMessage}}</p>
+          </div>
+        </div>
         
         <div class="row" ng-show="showplayer">
           <div class="col-md-4">
