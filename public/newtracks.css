@@ -8,6 +8,7 @@ h1 {
 p, a, a:visited, a:hover {
   color: #EEE;
   margin-top: 12px;
+  margin-right: 6px;
 }
 
 a {

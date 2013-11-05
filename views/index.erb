@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Newtracks.js</title>
+    <title>Newtracks <%= username %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="bootstrap.min.css">
     <link rel="stylesheet" href="newtracks.css">
@@ -19,7 +19,13 @@
         
         <div class="row" ng-show="showplayer">
           <div class="col-md-4">
-            <spotify-player tracks="{{spotifyTrackIds}}"></spotify-player>            
+            <spotify-player tracks="{{spotifyTrackIds}}"></spotify-player>      
+            
+            <p>
+              Here's a 
+              <a href="http://open.spotify.com/trackset/NewTracks for <%= username %>/{{spotifyTrackIds}}">link to your NewTracks</a>
+              so you can share them with your friends.
+            </p>      
           </div>
           
           <div class="col-md-8">
