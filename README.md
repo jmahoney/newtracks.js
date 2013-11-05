@@ -15,11 +15,9 @@ At this point the basic functionality is working
 * there's an angular module with a set of resources for talking to the internal last.fm api and with spotify directly
 * the front-end references an angular controller that does a series of lookups to eventually populate a string of ids for the embedded spotify player
 * the player loads and once all the api calls are done it's totally possible to play music
+* permanent link to spotify with the suggested tracks
+* artist images, linking back to their last.fm profiles
 
-On the todo list is:
-
-* only show the player once tracks are loaded
-* show a bunch of artist/album images next to the player
-* dive into angular routing and show different players based on different urls
+It could do with a serious makover and some error handling but it works and I enjoy using it every day.
 
 
