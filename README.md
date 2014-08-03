@@ -1,6 +1,6 @@
 ### newtracks.js
 
-An angular.js experiment with last.fm & spotify
+An angular.js experiment with last.fm & spotify - use it at [newtracks.cheerschopper.com](http://newtracks.cheerschopper.com)
 
 Let's pretend we're extending an existing app but we're only allowed to update 
 the HTML/CSS/JS - no new server side executable code is allowed.
